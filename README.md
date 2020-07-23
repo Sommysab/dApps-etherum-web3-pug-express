@@ -35,6 +35,6 @@ volumes: ['./:/usr/src/app']
 docker-compose build
 ```
 
-# For Metamask integration, implement the backend in the client-side with browsify
+# For Metamask integration, access the backend modules in the client-side with browsify
 
 # dApps-etherum-web3-pug-express
