@@ -1,0 +1,21 @@
+{
+  "name": "dApp-demo",
+  "description": "dApp-demo",
+  "author": {
+    "name": "Sab-Udeh Sommy"
+  },
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "license": "ISC",
+  "dependencies": {    
+    "dotenv": "^8.2.0",
+    "body-parser": "^1.19.0",
+    "big-integer": "^1.6.48",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "pug": "^2.0.4",
+    "web3": "^1.2.7"
+  }
+}

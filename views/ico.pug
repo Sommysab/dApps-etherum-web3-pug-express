@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  .container
+    h1 ICO / Dapp Application 
+
+    h2#notice 
+
+    label.col-lg-3.control-label(for='ebal') My Eth balance (Rinkeby)
+    .row
+      .form-group.mx-3
+        input#ebalAdd.form-control(type='text', placeholder="any address")
+      .form-group.mx-3
+        button#ebal Send
+
+
+    label.col-lg-3.control-label(for='tbal') My Token Balance
+    .row
+      .form-group.mx-3
+        input#tbalAdd.form-control(type='text', placeholder="any address")
+      .form-group.mx-3
+        button#tbal Send
+
+    label.col-lg-3.control-label(for='transfer') Transfer Token 
+    .row
+      .form-group.mx-3
+        input#trTo.form-control(type='text', placeholder="receiver address")
+      .form-group.mx-3
+        input#trAmt.form-control(type='text', placeholder="amount")
+      .form-group.mx-3
+        input#trFrom.form-control(type='text', placeholder="owner address")
+      .form-group.mx-3
+        button#transfer Send
+
+
+  script.
+
+      //- Token Balance
+      $('#tbal').on('click', () => {
+        $.post('/getbalance', {address: $('#tbalAdd').val()}, (data, status)=>{
+          if(status=='success' && !data.error){
+            alert(data.balance)
+          }
+        })
+      });
+
+      //- Eth Balance (rinkeby testnet)
+      $('#ebal').on('click', () => {
+        $.post('/getbalance_eth', {address: $('#ebalAdd').val()}, (data, status)=>{
+          if(status=='success' && !data.error){
+            alert(data.balance)
+          }
+          else alert(data.error)
+        })
+      });
+
+      //- Transfer
+      $('#transfer').on('click', async () => { 
+        const to = $('#trTo').val();  
+        const amt = $('#trAmt').val();  
+        const from = $('#trFrom').val();
+        payload = {to, amt, from};
+        $.post('/transfer', payload, (data, status) => {
+          if(status=='success' && !data.error){
+            alert(`Your transaction ID is ${data.hash}`)
+          }
+          else  alert(data.error)
+        })
+      }); 
+
+    
